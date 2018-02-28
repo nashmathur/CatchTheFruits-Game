@@ -18,6 +18,10 @@ var litchiimg;
 var orangeimg;
 var mangoimg;
 var kiwiimg;
+var catches;
+var drops;
+var start;
+var scorecount;
 
 window.onload = function(){
     w = 0.7 * window.innerWidth;
@@ -40,7 +44,10 @@ window.onload = function(){
     ctx.drawImage(tree, (w-(7*h/5))/2, 0, 7*h/5, h);
     basketimg = ctx.drawImage(basket, pos, 2*h-5*wObj, wObj, 0.7*wObj);
 
-    setInterval(RandomFruits, 1000);
+    catches = 0; 
+    drops = 0;
+    start = setInterval(RandomFruits, 750);
+    scorecount = setInterval(score, 5);
 }
 
 document.onkeydown = checkKey;
@@ -50,12 +57,12 @@ function checkKey(e) {
 
     if (e.keyCode == '37') {
         if (pos == lane + diff){
-            ctx.clearRect(pos, 2*h - 5*wObj, pos + wObj, 2*h - 5*wObj + 0.7*wObj);
+            ctx.clearRect(pos, 2*h - 5*wObj, wObj, 0.7*wObj);
             pos = lane;
             basketimg  = ctx.drawImage(basket, pos, 2*h-5*wObj, wObj, 0.7*wObj);
         }
         else if (pos == lane){
-            ctx.clearRect(pos, 2*h - 5*wObj, pos + wObj, 2*h - 5*wObj + 0.7*wObj);
+            ctx.clearRect(pos, 2*h - 5*wObj, wObj, 0.7*wObj);
             pos = lane - diff;
             basketimg = ctx.drawImage(basket, pos, 2*h-5*wObj, wObj, 0.7*wObj);
         }
@@ -65,12 +72,12 @@ function checkKey(e) {
     }
     else if (e.keyCode == '39') {
         if (pos == lane - diff){
-            ctx.clearRect(pos, 2*h - 5*wObj, pos + wObj, 2*h - 5*wObj + 0.7*wObj);
+            ctx.clearRect(pos, 2*h - 5*wObj, wObj, 0.7*wObj);
             pos = lane;
             basketimg  = ctx.drawImage(basket, pos, 2*h-5*wObj, wObj, 0.7*wObj);
         }
         else if (pos == lane){
-            ctx.clearRect(pos, 2*h - 5*wObj, pos + wObj, 2*h - 5*wObj + 0.7*wObj);
+            ctx.clearRect(pos, 2*h - 5*wObj, wObj, 0.7*wObj);
             pos = lane + diff;
             basketimg  = ctx.drawImage(basket, pos, 2*h-5*wObj, wObj, 0.7*wObj);
         }
@@ -80,67 +87,133 @@ function checkKey(e) {
     }
 }
 
+function score(){
+    ctx.font="30px Arial";
+    ctx.clearRect(10, 10, 50, 40);
+    ctx.clearRect(200, 10, 50, 40);
+    ctx.fillText(catches,10,50);
+    ctx.fillText(drops,200,50);
+}
+
 function applefall(n){
-    var level = wObj;
+    var level = 1.1 * wObj;
+    var l = lane + (n-1)*diff;
     function fall(){
-        if (level < 0.7 * h){
-            ctx.clearRect(pos, level, 0.4 * wObj, 0.4 * wObj);
+        if (level < 2*h - 5.4*wObj){
+            ctx.clearRect(l, level, 0.4 * wObj, 0.4 * wObj);
             level += 5;
-            appleimg = ctx.drawImage(apple, pos, level, 0.4 * wObj, 0.4 * wObj);
+            appleimg = ctx.drawImage(apple, l, level, 0.4 * wObj, 0.4 * wObj);
+        }
+        else{
+            if(l == pos){
+                catches += 1;
+            }
+            else{
+                drops += 1;
+            }
+            ctx.clearRect(l, level, 0.4 * wObj, 0.4 * wObj);
+            clearInterval(a);
         }
     }
-    setInterval(fall, 20);
+    var a = setInterval(fall, 20);
 }
 function orangefall(n){
-    var level = wObj;
+    var level = 1.1 * wObj;
+    var l = lane + (n-1)*diff;
     function fall(){
-        if (level < 0.7 * h){
-            ctx.clearRect(pos, level, 0.4 * wObj, 0.4 * wObj);
+        if (level < 2*h - 5.4*wObj){
+            ctx.clearRect(l, level, 0.4 * wObj, 0.4 * wObj);
             level += 5;
-            orangeimg = ctx.drawImage(orange, pos, level, 0.4 * wObj, 0.4 * wObj);
+            orangeimg = ctx.drawImage(orange, l, level, 0.4 * wObj, 0.4 * wObj);
+        }
+        else{
+            if(l == pos){
+                catches += 1;
+            }
+            else{
+                drops += 1;
+            }
+            ctx.clearRect(l, level, 0.4 * wObj, 0.4 * wObj);
+            clearInterval(a);
         }
     }
-    setInterval(fall, 20);
+    var a = setInterval(fall, 20);
 }
 function mangofall(n){
-    var level = wObj;
+    var level = 1.1 * wObj;
+    var l = lane + (n-1)*diff;
     function fall(){
-        if (level < 0.7 * h){
-            ctx.clearRect(pos, level, 0.4 * wObj, 0.4 * wObj);
+        if (level < 2*h - 5.4*wObj){
+            ctx.clearRect(l, level, 0.4 * wObj, 0.4 * wObj);
             level += 5;
-            mangoimg = ctx.drawImage(mango, pos, level, 0.4 * wObj, 0.4 * wObj);
+            mangoimg = ctx.drawImage(mango, l, level, 0.4 * wObj, 0.4 * wObj);
+        }
+        else{
+            if(l == pos){
+                catches += 1;
+            }
+            else{
+                drops += 1;
+            }
+            ctx.clearRect(l, level, 0.4 * wObj, 0.4 * wObj);
+            clearInterval(a);
         }
     }
-    setInterval(fall, 20);
+    var a = setInterval(fall, 20);
 }
 function litchifall(n){
-    var level = wObj;
+    var level = 1.1 * wObj;
+    var l = lane + (n-1)*diff;
     function fall(){
-        if (level < 0.7 * h){
-            ctx.clearRect(pos, level, 0.4 * wObj, 0.4 * wObj);
+        if (level < 2*h - 5.4*wObj){
+            ctx.clearRect(l, level, 0.4 * wObj, 0.4 * wObj);
             level += 5;
-            litchiimg = ctx.drawImage(litchi, pos, level, 0.4 * wObj, 0.4 * wObj);
+            litchiimg = ctx.drawImage(litchi, l, level, 0.4 * wObj, 0.4 * wObj);
+        }
+        else{
+            if(l == pos){
+                catches += 1;
+            }
+            else{
+                drops += 1;
+            }
+            ctx.clearRect(l, level, 0.4 * wObj, 0.4 * wObj);
+            clearInterval(a);
         }
     }
-    setInterval(fall, 20);
+    var a = setInterval(fall, 20);
 }
 function kiwifall(n){
-    var level = wObj;
+    var level = 1.1 * wObj;
+    var l = lane + (n-1)*diff;
     function fall(){
-        if (level < 0.7 * h){
-            ctx.clearRect(pos, level, 0.4 * wObj, 0.4 * wObj);
+        if (level < 2*h - 5.4*wObj){
+            ctx.clearRect(l, level, 0.4 * wObj, 0.4 * wObj);
             level += 5;
-            kiwiimg = ctx.drawImage(kiwi, pos, level, 0.4 * wObj, 0.4 * wObj);
+            kiwiimg = ctx.drawImage(kiwi, l, level, 0.4 * wObj, 0.4 * wObj);
+        }
+        else{
+            if(l == pos){
+                catches += 1;
+            }
+            else{
+                drops += 1;
+            }
+            ctx.clearRect(l, level, 0.4 * wObj, 0.4 * wObj);
+            clearInterval(a);
         }
     }
-    setInterval(fall, 20);
+    var a = setInterval(fall, 20);
 }
 
 function RandomFruits(){    
     var n = Math.floor((Math.random() * 100)%5);
-    console.log(n);
     var l = Math.floor((Math.random() * 100)%3);
-    console.log(l);
+    
+    if (drops >= 5){
+        clearInterval(start);
+        clearInterval(scorecount);
+    }
 
     switch(n){
         case 0:
