@@ -115,7 +115,7 @@ function applefall(n){
             clearInterval(a);
         }
     }
-    var a = setInterval(fall, 20);
+    var a = setInterval(fall, 10);
 }
 function orangefall(n){
     var level = 1.1 * wObj;
@@ -137,7 +137,7 @@ function orangefall(n){
             clearInterval(a);
         }
     }
-    var a = setInterval(fall, 20);
+    var a = setInterval(fall, 10);
 }
 function mangofall(n){
     var level = 1.1 * wObj;
@@ -159,7 +159,7 @@ function mangofall(n){
             clearInterval(a);
         }
     }
-    var a = setInterval(fall, 20);
+    var a = setInterval(fall, 10);
 }
 function litchifall(n){
     var level = 1.1 * wObj;
@@ -181,7 +181,7 @@ function litchifall(n){
             clearInterval(a);
         }
     }
-    var a = setInterval(fall, 20);
+    var a = setInterval(fall, 10);
 }
 function kiwifall(n){
     var level = 1.1 * wObj;
@@ -203,7 +203,7 @@ function kiwifall(n){
             clearInterval(a);
         }
     }
-    var a = setInterval(fall, 20);
+    var a = setInterval(fall, 10);
 }
 
 function RandomFruits(){    
